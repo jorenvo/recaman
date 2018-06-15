@@ -1,0 +1,6 @@
+[package]
+name = "recaman-svg"
+version = "0.1.0"
+authors = ["Joren Van Onder <joren.vanonder@gmail.com>"]
+
+[dependencies]
