@@ -1,5 +1,3 @@
-#![allow(dead_code)]
-
 extern crate svg;
 
 use std::collections::HashSet;
@@ -32,14 +30,6 @@ pub fn recaman_sequence(n: u32) -> Vec<u32> {
     }
 
     seq
-}
-
-#[derive(Default, Clone)]
-struct Point {
-    x: u32,
-    height: u32,
-    has_line_under: bool,
-    has_line_over: bool,
 }
 
 pub fn generate_svg_document(recaman_sequence: &Vec<u32>) -> svg::Document {
