@@ -38,6 +38,7 @@ pub fn generate_svg_document(recaman_sequence: &Vec<u32>) -> svg::Document {
     const ARC_RX: u32 = 1;
     const ARC_RY: u32 = 1;
 
+    const VIEWBOX_HEIGHT: u32 = 100;
     const LINE_HEIGHT: u32 = 50;
     const X_SCALE: u32 = 5;
     let scale = |x| x * X_SCALE;
@@ -69,7 +70,7 @@ pub fn generate_svg_document(recaman_sequence: &Vec<u32>) -> svg::Document {
         max_x = max_x.max(x);
     }
 
-    let document = Document::new().set("viewBox", (0, 0, scale(max_x), 100));
+    let document = Document::new().set("viewBox", (0, 0, scale(max_x), VIEWBOX_HEIGHT));
     let path = Path::new()
         .set("fill", "none")
         .set("stroke", "black")
