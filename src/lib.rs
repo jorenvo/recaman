@@ -51,7 +51,8 @@ pub fn generate_svg_document(recaman_sequence: &Vec<u32>) -> svg::Document {
         let x = *x;
         let sweep_flag = if x > last_x {
             !should_go_up
-        } else { // invert if going backwards
+        } else {
+            // invert if going backwards
             should_go_up
         };
 
