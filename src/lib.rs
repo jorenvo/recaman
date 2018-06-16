@@ -8,27 +8,27 @@ use svg::node::element::path::Data;
 use svg::node::element::Path;
 use svg::Document;
 
-pub fn recaman_sequence(n: u64) -> Vec<u64> {
+pub fn recaman_sequence(n: u32) -> Vec<u32> {
     if n == 0 {
         return vec![];
     }
 
     let mut used_numbers = HashSet::new();
-    let mut seq: Vec<u64> = vec![0];
+    let mut seq: Vec<u32> = vec![0];
     while seq.len() < n as usize {
-        let seq_len = seq.len() as i64;
-        let last = *seq.last().unwrap() as i64;
+        let seq_len = seq.len() as i32;
+        let last = *seq.last().unwrap() as i32;
         let subtract_result = last - seq_len;
 
-        let a: i64;
-        if subtract_result > 0 && !used_numbers.contains(&(subtract_result as u64)) {
+        let a: i32;
+        if subtract_result > 0 && !used_numbers.contains(&(subtract_result as u32)) {
             a = subtract_result;
         } else {
             a = last + seq_len;
         }
 
-        seq.push(a as u64);
-        used_numbers.insert(a as u64);
+        seq.push(a as u32);
+        used_numbers.insert(a as u32);
     }
 
     seq
@@ -36,18 +36,18 @@ pub fn recaman_sequence(n: u64) -> Vec<u64> {
 
 #[derive(Default, Clone)]
 struct Point {
-    x: u64,
-    height: u64,
+    x: u32,
+    height: u32,
     has_line_under: bool,
     has_line_over: bool,
 }
 
-pub fn generate_svg_document(recaman_sequence: &Vec<u64>) -> svg::Document {
-    const LINE_HEIGHT: u64 = 50;
+pub fn generate_svg_document(recaman_sequence: &Vec<u32>) -> svg::Document {
+    const LINE_HEIGHT: u32 = 50;
     let max_x = *recaman_sequence.iter().max().unwrap();
 
-    const X_SCALE: u64 = 5;
-    let scale = |x: u64| x * X_SCALE;
+    const X_SCALE: u32 = 5;
+    let scale = |x: u32| x * X_SCALE;
 
     let mut data = Data::new().move_to((0, LINE_HEIGHT));
     for el in recaman_sequence {
