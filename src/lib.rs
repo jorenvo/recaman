@@ -43,29 +43,40 @@ struct Point {
 }
 
 pub fn generate_svg_document(recaman_sequence: &Vec<u32>) -> svg::Document {
-    const LINE_HEIGHT: u32 = 50;
-    let max_x = *recaman_sequence.iter().max().unwrap();
+    const ARC_LARGE_FLAG: u32 = 0;
+    const ARC_ANGLE: u32 = 0;
+    const ARC_RX: u32 = 1;
+    const ARC_RY: u32 = 1;
 
+    const LINE_HEIGHT: u32 = 50;
     const X_SCALE: u32 = 5;
-    let scale = |x: u32| x * X_SCALE;
+    let scale = |x| x * X_SCALE;
 
     let mut data = Data::new().move_to((0, LINE_HEIGHT));
-    for el in recaman_sequence {
-        let el = *el;
-        let rx = 1;
-        let ry = 1;
-        let angle = 0;
-        let large_arc_flag = 0;
-        let sweep_flag = 0;
+    let mut should_go_up = false;
+    let mut last_x = 0;
+    let mut max_x = u32::min_value();
+    for x in recaman_sequence {
+        let x = *x;
+        let sweep_flag = if x > last_x {
+            !should_go_up
+        } else { // invert if going backwards
+            should_go_up
+        };
+
         data = data.elliptical_arc_to((
-            rx,
-            ry,
-            angle,
-            large_arc_flag,
-            sweep_flag,
-            scale(el),
+            ARC_RX,
+            ARC_RY,
+            ARC_ANGLE,
+            ARC_LARGE_FLAG,
+            sweep_flag as u32,
+            scale(x),
             LINE_HEIGHT,
         ));
+
+        last_x = x;
+        should_go_up = !should_go_up;
+        max_x = max_x.max(x);
     }
 
     let document = Document::new().set("viewBox", (0, 0, scale(max_x), 100));

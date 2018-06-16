@@ -3,7 +3,7 @@ extern crate recaman_svg;
 use recaman_svg::*;
 
 pub fn main() {
-    let sequence = recaman_sequence(15);
+    let sequence = recaman_sequence(50);
     let svg = generate_svg_document(&sequence);
     write_svg_document(svg, "image.svg");
 }
