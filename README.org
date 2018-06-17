@@ -1,0 +1,28 @@
+* Recamán sequence SVG generator
+Creates an SVG image based on the [[https://oeis.org/A005132][Recamán sequence]].
+* Inspiration
+The rendered image is inspired by the [[https://www.amazon.com/Visions-Universe-Coloring-Journey-Mysteries/dp/1615193677/][Visions of the Universe]] book by Alex Bellos and Edmund Harriss.
+* Example
+[[./example.svg]]
+* Building
+#+BEGIN_EXAMPLE
+$ cargo build --release
+#+END_EXAMPLE
+
+The resulting binary will be at =target/release/recaman-svg=.
+* Usage
+#+BEGIN_EXAMPLE
+USAGE:
+    recaman-svg [OPTIONS] <OUTPUT>
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -n, --amount <amount>                Amount of Recamán points to generate. [default: 20]
+    -w, --stroke_width <stroke width>    Stroke width of the line in the image. [default: 1.0]
+
+ARGS:
+    <OUTPUT>    Write SVG to OUTPUT.
+#+END_EXAMPLE
