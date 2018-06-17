@@ -8,7 +8,7 @@ pub fn main() {
     let matches = App::new("Recamán SVG generator")
         .version("1.0")
         .author("Joren Van Onder <joren.vanonder@gmail.com>")
-        .about("TODO")
+        .about("Generates an SVG image based on a Recamán sequence.")
         .arg(
             Arg::with_name("amount")
                 .short("n")
