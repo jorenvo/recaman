@@ -3,7 +3,7 @@ extern crate svg;
 use std::collections::HashSet;
 
 use svg::node::element::path::Data;
-use svg::node::element::{Group, Path};
+use svg::node::element::Path;
 use svg::Document;
 
 pub fn recaman_sequence(n: u32) -> Vec<u32> {
@@ -87,7 +87,7 @@ pub fn generate_svg_document(recaman_sequence: &Vec<u32>) -> svg::Document {
             scale(0.0 - MARGIN),
             scale(0.0 - MARGIN),
             scale(max_x as f32 + MARGIN * 2.0),
-            scale(get_line_height(&recaman_sequence) * 2.0 + MARGIN * 2.0),
+            line_height * 2.0 + scale(MARGIN * 2.0),
         ),
     );
     let path = Path::new()
@@ -95,9 +95,8 @@ pub fn generate_svg_document(recaman_sequence: &Vec<u32>) -> svg::Document {
         .set("stroke", "black")
         .set("stroke-width", 1.0)
         .set("d", data);
-    let group = Group::new().set("transform", "rotate(0)").add(path);
 
-    document.add(group)
+    document.add(path)
 }
 
 pub fn write_svg_document(document: svg::Document, filename: &str) {

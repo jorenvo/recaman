@@ -18,14 +18,6 @@ pub fn main() {
                 .takes_value(true),
         )
         .arg(
-            Arg::with_name("rotation")
-                .short("r")
-                .long("rotation")
-                .default_value("0")
-                .help("Rotate the image by <rotation> degrees.")
-                .takes_value(true),
-        )
-        .arg(
             Arg::with_name("OUTPUT")
                 .help("Write SVG to OUTPUT.")
                 .required(true),
