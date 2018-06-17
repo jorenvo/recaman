@@ -1,6 +1,7 @@
 extern crate clap;
 extern crate recaman_svg;
 
+use std::process;
 use clap::{App, Arg};
 use recaman_svg::*;
 
@@ -28,7 +29,10 @@ pub fn main() {
         .value_of("amount")
         .unwrap()
         .parse()
-        .expect("Not a valid integer.");
+        .unwrap_or_else(|_err| {
+            eprintln!("Not a valid amount.");
+            process::exit(1);
+        });
     let file = matches.value_of("OUTPUT").unwrap();
 
     let sequence = recaman_sequence(amount);

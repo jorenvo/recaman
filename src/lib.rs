@@ -1,5 +1,6 @@
 extern crate svg;
 
+use std::process;
 use std::collections::HashSet;
 
 use svg::node::element::path::Data;
@@ -100,5 +101,8 @@ pub fn generate_svg_document(recaman_sequence: &Vec<u32>) -> svg::Document {
 }
 
 pub fn write_svg_document(document: svg::Document, filename: &str) {
-    svg::save(filename, &document).unwrap();
+    svg::save(filename, &document).unwrap_or_else(|err| {
+        eprintln!("Couldn't write file: {}", err.to_string().to_lowercase());
+        process::exit(1);
+    });
 }
