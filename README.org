@@ -4,6 +4,7 @@ Creates an SVG image based on the [[https://oeis.org/A005132][Recamán sequence]
 The rendered image is inspired by the [[https://www.amazon.com/Visions-Universe-Coloring-Journey-Mysteries/dp/1615193677/][Visions of the Universe]] book by Alex Bellos and Edmund Harriss.
 * Example
 [[./example.svg]]
+[[https://jorenvo.github.io/recaman/][Animated example]].
 * Building
 #+BEGIN_EXAMPLE
 $ cargo build --release
