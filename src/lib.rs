@@ -43,7 +43,7 @@ fn get_line_height(recaman_sequence: &Vec<u32>) -> f32 {
     0.5 * recaman_sequence.len() as f32
 }
 
-pub fn generate_svg_document(recaman_sequence: &Vec<u32>) -> svg::Document {
+pub fn generate_svg_document(recaman_sequence: &Vec<u32>, stroke_width: f32) -> svg::Document {
     const ARC_LARGE_FLAG: u32 = 0;
     const ARC_ANGLE: u32 = 0;
     const ARC_RX: u32 = 1;
@@ -94,7 +94,7 @@ pub fn generate_svg_document(recaman_sequence: &Vec<u32>) -> svg::Document {
     let path = Path::new()
         .set("fill", "none")
         .set("stroke", "black")
-        .set("stroke-width", 1.0)
+        .set("stroke-width", stroke_width)
         .set("d", data);
 
     document.add(path)
