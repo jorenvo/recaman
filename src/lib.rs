@@ -32,18 +32,27 @@ pub fn recaman_sequence(n: u32) -> Vec<u32> {
     seq
 }
 
+/// Calculates the line height that will center the image.
+///
+/// Every n will jump one position farther than the last
+/// one. Therefore every arc will have a radius exactly 1 bigger than
+/// the last one. Because unit arcs (radius=1) are used the required
+/// line height at which we have to draw is 0.5 * n.
+fn get_line_height(recaman_sequence: &Vec<u32>) -> f32 {
+    0.5 * recaman_sequence.len() as f32
+}
+
 pub fn generate_svg_document(recaman_sequence: &Vec<u32>) -> svg::Document {
     const ARC_LARGE_FLAG: u32 = 0;
     const ARC_ANGLE: u32 = 0;
     const ARC_RX: u32 = 1;
     const ARC_RY: u32 = 1;
+    const X_SCALE: u32 = 2;
 
-    const VIEWBOX_HEIGHT: u32 = 100;
-    const LINE_HEIGHT: u32 = 50;
-    const X_SCALE: u32 = 5;
-    let scale = |x| x * X_SCALE;
+    let scale = |x: f32| x * X_SCALE as f32;
+    let line_height = scale(get_line_height(recaman_sequence));
 
-    let mut data = Data::new().move_to((0, LINE_HEIGHT));
+    let mut data = Data::new().move_to((0, line_height));
     let mut should_go_up = false;
     let mut last_x = 0;
     let mut max_x = u32::min_value();
@@ -62,8 +71,8 @@ pub fn generate_svg_document(recaman_sequence: &Vec<u32>) -> svg::Document {
             ARC_ANGLE,
             ARC_LARGE_FLAG,
             sweep_flag as u32,
-            scale(x),
-            LINE_HEIGHT,
+            scale(x as f32),
+            line_height,
         ));
 
         last_x = x;
@@ -71,11 +80,20 @@ pub fn generate_svg_document(recaman_sequence: &Vec<u32>) -> svg::Document {
         max_x = max_x.max(x);
     }
 
-    let document = Document::new().set("viewBox", (0, 0, scale(max_x), VIEWBOX_HEIGHT));
+    const MARGIN: f32 = 2.0;
+    let document = Document::new().set(
+        "viewBox",
+        (
+            scale(0.0 - MARGIN),
+            scale(0.0 - MARGIN),
+            scale(max_x as f32 + MARGIN * 2.0),
+            scale(get_line_height(&recaman_sequence) * 2.0 + MARGIN * 2.0),
+        ),
+    );
     let path = Path::new()
         .set("fill", "none")
         .set("stroke", "black")
-        .set("stroke-width", 1)
+        .set("stroke-width", 1.0)
         .set("d", data);
     let group = Group::new().set("transform", "rotate(0)").add(path);
 
