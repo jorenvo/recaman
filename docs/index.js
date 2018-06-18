@@ -1,14 +1,7 @@
 function set_path_length () {
-    let path = $('.recaman-svg-path');
-    let length = path[0].getTotalLength();
+    let path = document.querySelector('.recaman-svg-path');
+    let length = path.getTotalLength();
 
-    path.css('stroke-dasharray', length);
-    path.css('stroke-dashoffset', length);
-
-    $.keyframe.define([{
-        'name': 'animator',
-        '0%': {'stroke-dashoffset': length},
-        '75%': {'stroke-dashoffset': 0},
-        '100%': {'stroke-dashoffset': 0},
-    }]);
+    path.style['stroke-dasharray'] = length;
+    path.style['stroke-dashoffset'] = length;
 }
