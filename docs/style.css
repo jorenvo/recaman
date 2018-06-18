@@ -17,17 +17,3 @@
     animation-iteration-count: infinite;
     animation-timing-function: ease-in;
 }
-
-@keyframes animator {
-    0% {  /* temp */
-        stroke-dashoffset: 15866.58;
-    }
-
-    75% {
-        stroke-dashoffset: 0;
-    }
-
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
