@@ -9,8 +9,7 @@
 }
 
 .recaman-svg-path {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
+    stroke-dasharray: 15866.58;
 
     animation-duration: 20s;
     animation-name: animator;
@@ -19,7 +18,7 @@
 }
 
 @keyframes animator {
-    0% {  /* temp */
+    0% {
         stroke-dashoffset: 15866.58;
     }
 
