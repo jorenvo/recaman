@@ -1,7 +1,12 @@
 [package]
 name = "recaman-svg"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["Joren Van Onder <joren.vanonder@gmail.com>"]
+description = "Creates an SVG image based on the Recamán sequence."
+documentation = "https://github.com/jorenvo/recaman"
+repository = "https://github.com/jorenvo/recaman"
+keywords = ["recaman", "svg"]
+license = "GPL-3.0+"
 
 [dependencies]
 svg = "0.5.11"
